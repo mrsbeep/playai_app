@@ -5,6 +5,15 @@ import { useEffect, useState } from "react";
 
 const webEmbedId = "bj83C-zLxgJ2dBj8x4v4_";
 
+interface ChangeTextEvent {
+  name: "change-text";
+  data: {
+    text: string;
+  };
+}
+
+type AppEvent = ChangeTextEvent;
+
 const Home = () => {
   const [text, setText] = useState("Change this text");
 
@@ -16,9 +25,9 @@ const Home = () => {
         text: { type: "string", description: "The text to change to" },
       },
     },
-  ] as const;
+  ];
 
-  const onEvent = (event: any) => {
+  const onEvent = (event: AppEvent) => {
     console.log("onEvent: ", event);
     if (event.name === "change-text") {
       setText(event.data.text);
